@@ -1,1 +1,9 @@
-成功安置Mysql以后，以管理员身份运行cmd,进入到Mysql的bin路径，输入mysql -u root -p 启动本地Mysql，如果安装成功则会出现Enter password：
+#Mysql的密码设置
+成功安置Mysql以后，以管理员身份运行cmd,进入到Mysql的bin路径，输入mysql -u root -p 启动本地Mysql，如果安装成功则会出现Enter password：代码如下：```
+```
+F:\mysql-8.0.16>cd bin
+
+F:\mysql-8.0.16\bin>mysql -u root -p
+Enter password:***********
+```
+上面输入的是初始密码，成功进入后出现：Welcome to the MySQL monitor.  …… Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.的欢迎词
