@@ -1,4 +1,5 @@
-#Mysql的密码设置
+##Mysql的密码设置
+
 成功安置Mysql以后，以管理员身份运行cmd,进入到Mysql的bin路径，输入mysql -u root -p 启动本地Mysql，如果安装成功则会出现Enter password：上面输如的密码是Mysql生成的Temporary Password，代码如下：
 ```
 F:\mysql-8.0.16>cd bin
@@ -20,3 +21,10 @@ mysql> alter user 'root'@'localhost' identified by '000111222';
 ERROR 1819 (HY000): Your password does not satisfy the current policy requirements
 ```
 这是与Mysql的validate_password_policy的值有关，深入了解可以参考[mysql5.7初始化密码报错 ](https://blog.csdn.net/memory6364/article/details/82426052)
+validate_password_policy的默认值是1，即要求密码的组成必须有数字、大（小）写字母、特殊字符并满足长度要求。所以，可以按要求来设置密码，也可以通过调整validate_password_policy的值来改变密码的设置规则。比如将validate_password_policy设置为0,然后用'000111222'做密码。
+在此，我们遵循规则：
+```
+mysql> alter user 'root'@'localhost' identified by 'Password001!';
+Query OK, 0 rows affected (0.43 sec)
+```
+则显示密码修改完成！
