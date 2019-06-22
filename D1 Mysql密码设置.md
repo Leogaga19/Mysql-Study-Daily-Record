@@ -1,4 +1,4 @@
-##Mysql的密码设置
+## Mysql的密码设置
 
 成功安置Mysql以后，以管理员身份运行cmd,进入到Mysql的bin路径，输入mysql -u root -p 启动本地Mysql，如果安装成功则会出现Enter password：上面输如的密码是Mysql生成的Temporary Password，代码如下：
 ```
