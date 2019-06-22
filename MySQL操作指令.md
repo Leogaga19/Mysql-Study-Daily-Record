@@ -67,3 +67,32 @@ Query OK, 1 row affected, 2 warnings (0.24 sec)
 mysql> DROP DATABASE abc1;
 Query OK, 0 rows affected (0.36 sec)
 ```
+
+### MySQL选择数据库
+成功启动MySQL服务后，可能有N个数据库，所以需要选择目标数据库，如果知道目标数据库名称，在mysql>_ 命令提示窗口使用```use <目标数据库名称>```命令来打开目标数据库，如下：
+```
+mysql use abc;
+Database changed
+mysql>
+```
+
+当然，可以使用```SHOW DATABASES;```来显示所有数据库，如下：
+```
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| abc                |
+| abc2               |
+| emp                |
+| employees          |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+8 rows in set (0.00 sec)
+
+mysql>
+```
+
