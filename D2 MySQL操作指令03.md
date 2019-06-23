@@ -71,8 +71,29 @@ FROM table1_name, table2_name,……, tableN_name
 以下为操作符列表，可用于 WHERE 子句中。下表中实例假定 A 为 10, B 为 20  
 ![image](https://github.com/Leogaga19/Mysql-Study-Daily-Record/blob/master/Photos/WHERE%E9%80%BB%E8%BE%91%E6%93%8D%E4%BD%9C%E7%AC%A6.PNG)
 
-如果我们想在 MySQL 数据表中读取指定的数据，WHERE 子句是非常有用的。  
-使用主键来作为 WHERE 子句的条件查询是非常快速的。  
+使用主键来作为 WHERE 子句的条件查询非常快速。  
+**MySQL 的 WHERE 子句的字符串比较是不区分大小写的。 你可以使用 BINARY 关键字来设定 WHERE 子句的字符串比较是区分大小写的。** 
+```
+mysql> SELECT * FROM gtb1
+    -> WHERE BINARY g_author='lwy';
++------+---------+----------+-----------------+
+| g_id | g_title | g_author | submission_date |
++------+---------+----------+-----------------+
+|    9 | 自学    | lwy      | 2019-06-23      |
++------+---------+----------+-----------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM gtb1
+    -> WHERE g_author='lwy';
++------+---------+----------+-----------------+
+| g_id | g_title | g_author | submission_date |
++------+---------+----------+-----------------+
+|    3 | 练习    | LWY      | 2019-06-22      |
+|    9 | 自学    | lwy      | 2019-06-23      |
++------+---------+----------+-----------------+
+2 rows in set (0.00 sec)
+```
+
 如果给定的条件在表中没有任何匹配的记录，那么查询不会返回任何数据。
 示例：
 ```
