@@ -1,7 +1,7 @@
 ## MySQL操作指令
 学习教程为[RUNOOB](https://www.runoob.com/mysql/mysql-connection.html)，操作系统Win10-64位，MySQL版本8.0.16 MySQL Community Server。
 
-### 连接MySQL
+### 连接本地MySQL
 以管理员身份打开cmd，进入到MySQL安置目录的bin目录。连接本地Mysql服务器实例：
 ```
 F:\mysql-8.0.16\bin> mysql -u root -p
@@ -23,6 +23,8 @@ Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 然后光标前面出现mysql>_命令提示窗口，接下来即可执行任何SQL命令。
 
 上述实例中，使用root 用户登录MySQL服务器，root用户拥有最高权限。同时，也可用其他的MySQL用户登录，前提是那个用户的权限足够。
+
+### 退出MySQL
 
 退出mysql>_命令提示窗口可以使用exit或quit命令：
 ```
