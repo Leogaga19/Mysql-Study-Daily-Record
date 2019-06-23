@@ -28,6 +28,7 @@ Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 登录语法```mysql -h(主机IP) -u(用户名) -p(用户密码)```
 
 设远程主机IP：192.168.10.1，用户名guest1，密码123abc。登录命令为：
+
 ```mysql -h192.168.10.1 -uguest1 -p123abc```
 
 ### 3.退出MySQL
