@@ -131,7 +131,7 @@ mysql> SELECT * FROM gtb2;    #读取数据表！使用星号（*）来代替其
 12 rows in set (0.00 sec)
 ```
 
-### MySQL数据表数据查询
+### 6.MySQL数据表数据查询
 命令：
 ```
 SELECT column1_name, column2_name,……, columnN_name 
@@ -187,5 +187,56 @@ mysql> SELECT * FROM gtb2;
 12 rows in set (0.00 sec)
 ```
 
+### 7.MySQL数据表WHERE条件数据查询
+命令：
+```
+SELECT column1_name, column2_name,……, columnN_name 
+FROM table1_name, table2_name,……, tableN_name
+[WHERE Clause]
+[LIMIT N][ OFFSET M]
+```
+1. WHERE 子句中指定任何条件，如果条件为字符需要用‘’或者""来框住；  
+2. 使用 AND 或者 OR 指定一个或多个条件；  
+3. WHERE 子句也可以运用于 SQL 的 DELETE 或者 UPDATE 命令；  
+4. WHERE 子句类似于程序语言中的 if 条件，根据 MySQL 表中的字段值来读取指定的数据。  
+以下为操作符列表，可用于 WHERE 子句中。下表中实例假定 A 为 10, B 为 20  
+![image](https://github.com/Leogaga19/Mysql-Study-Daily-Record/blob/master/Photos/WHERE%E9%80%BB%E8%BE%91%E6%93%8D%E4%BD%9C%E7%AC%A6.PNG)
+如果我们想在 MySQL 数据表中读取指定的数据，WHERE 子句是非常有用的。  
+使用主键来作为 WHERE 子句的条件查询是非常快速的。  
+如果给定的条件在表中没有任何匹配的记录，那么查询不会返回任何数据。
+示例：
+```
+mysql> SELECT * FROM gtb2
+    -> WHERE g2_class='五年级2班';
++-------+-----------+---------------+-----------+
+| g2_id | g2_name   | g2_class      | g2_gender |
++-------+-----------+---------------+-----------+
+|     2 | 小刚      | 五年级2班     | F         |
+|     4 | 小红      | 五年级2班     | M         |
+|     7 | 关羽      | 五年级2班     | M         |
+|    11 | 小红帽    | 五年级2班     | F         |
++-------+-----------+---------------+-----------+
+4 rows in set (0.00 sec)
 
+mysql> SELECT g2_name FROM gtb2
+    -> WHERE g2_class='五年级2班';
++-----------+
+| g2_name   |
++-----------+
+| 小刚      |
+| 小红      |
+| 关羽      |
+| 小红帽    |
++-----------+
+4 rows in set (0.00 sec)
 
+mysql> SELECT g2_name FROM gtb2
+    -> WHERE g2_class='五年级2班' AND g2_gender<>'F';
++---------+
+| g2_name |
++---------+
+| 小红    |
+| 关羽    |
++---------+
+2 rows in set (0.00 sec)
+```
