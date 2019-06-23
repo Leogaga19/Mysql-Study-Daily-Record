@@ -111,7 +111,7 @@ mysql> INSERT INTO gtb2
     -> ( '大乔', '五年级1班', default);   #此处g2_gender字段用DEFAULT来代替，因该字段在创建表时设置为DEFAULT 'M'故此其将显示默认设置。
 Query OK, 1 row affected (0.40 sec)
 
-mysql> SELECT * FROM gtb2;    #读取数据表！
+mysql> SELECT * FROM gtb2;    #读取数据表！使用星号（*）来代替其他字段，SELECT语句会返回表的所有字段数据。
 +-------+-----------+-----------------+-----------+
 | g2_id | g2_name   | g2_class        | g2_gender |
 +-------+-----------+-----------------+-----------+
@@ -129,7 +129,22 @@ mysql> SELECT * FROM gtb2;    #读取数据表！
 |    12 | 大乔      | 五年级1班       | M         |
 +-------+-----------+-----------------+-----------+
 12 rows in set (0.00 sec)
+```
 
+### MySQL数据表数据查询
+命令：
+```
+SELECT column1_name, column2_name,……, columnN_name 
+FROM table1_name, table2_name,……, tableN_name
+[WHERE Clause]
+[LIMIT N][ OFFSET M]
+```
+命令说明：1.查询语句中你可以使用一个或者多个表，表之间使用逗号(,)分割，并使用WHERE语句来设定查询条件；  
+2.SELECT 命令可以读取一条或者多条记录；  
+3.你可以使用星号（*）来代替其他字段，SELECT语句会返回表的所有字段数据；  
+4.你可以使用 WHERE 语句来包含任何条件。  
+5.你可以使用 LIMIT 属性来设定返回的记录数。  
+6.你可以通过OFFSET指定SELECT语句开始查询的数据偏移量。默认情况下偏移量为0。
 
 
 
