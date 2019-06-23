@@ -102,13 +102,13 @@ Query OK, 1 row affected (0.24 sec)
 mysql> INSERT INTO gtb2
     -> (g2_name, g2_class, g2_gender)
     -> VALUES
-    -> ( '小红帽', '五年级2班', 'F');  #此处不输入g2_id,因为该字段在创建表时，已设置为```AUTO_INCREMENT(自动增加) ```属性。 故，该字段会自动递增我们可以不去设置。实际上，大部分上述情况时该字段都省略。
+    -> ( '小红帽', '五年级2班', 'F');  #此处不输入g2_id，因为该字段在创建表时已设为AUTO_INCREMENT(自动增加)属性。 故其会自动递增，可以不去设置。实际上，大部分上述情况时该字段都省略。
 Query OK, 1 row affected (0.30 sec)
 
 mysql> INSERT INTO gtb2
     -> (g2_name, g2_class, g2_gender)   
     -> VALUES
-    -> ( '大乔', '五年级1班', default);   #此处```g2_gender```字段我们用```DEFAULT```来代替，因为该字段在创建表时，已设置为```DEFAULT 'M'```故此字段讲显示默认设置。
+    -> ( '大乔', '五年级1班', default);   #此处g2_gender字段用DEFAULT来代替，因该字段在创建表时设置为DEFAULT 'M'故此其将显示默认设置。
 Query OK, 1 row affected (0.40 sec)
 
 mysql> SELECT * FROM gtb2;    #读取数据表！
