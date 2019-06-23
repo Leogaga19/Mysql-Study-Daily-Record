@@ -55,9 +55,20 @@ mysql> CREATE TABLE sexes(sex char(1) NOT NULL) ENGINE = INNODB;
 注意：存储引擎是个重点，后面我们详细讲解。CHARSET 设置编码
 
 ### 3.显示数据表结构
-命令```mysql> DESCRIBE table_name;``` 示例：
+命令`mysql> DESCRIBE table_name;`当然，`mysql> DESC table_name;`效果相同！ 示例：
 ```
 mysql> DESCRIBE gtb2;
++-----------+----------+------+-----+---------+----------------+
+| Field     | Type     | Null | Key | Default | Extra          |
++-----------+----------+------+-----+---------+----------------+
+| g2_id     | int(11)  | NO   | PRI | NULL    | auto_increment |
+| g2_name   | char(50) | NO   |     | NULL    |                |
+| g2_class  | char(50) | NO   |     | NULL    |                |
+| g2_gender | char(1)  | YES  |     | M       |                |
++-----------+----------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> DESC gtb2;
 +-----------+----------+------+-----+---------+----------------+
 | Field     | Type     | Null | Key | Default | Extra          |
 +-----------+----------+------+-----+---------+----------------+
