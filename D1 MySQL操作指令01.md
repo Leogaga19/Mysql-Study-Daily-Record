@@ -105,3 +105,11 @@ mysql> SHOW DATABASES;
 mysql>
 ```
 
+### 7.MySQL切换数据库
+在mysql>_ 命令提示窗口使用```use <新目标数据库名称>```命令来切换目标数据库，如下：
+```
+mysql> use abc2;
+Database changed
+mysql>
+```
+
