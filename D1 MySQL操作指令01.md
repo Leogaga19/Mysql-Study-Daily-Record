@@ -1,5 +1,11 @@
 ## MySQL操作指令
-学习教程为[RUNOOB](https://www.runoob.com/mysql/mysql-connection.html)，操作系统Win10-64位，MySQL版本8.0.16 MySQL Community Server。
+学习教程为[RUNOOB](https://www.runoob.com/mysql/mysql-connection.html)，操作系统Win10-64位，MySQL版本8.0.16 MySQL Community Server。  
+cmd输入中文切换了输入法（比如搜狗输入法），在cmd种按下回车永远都是拼音对应的第一个选项，调整方法：在cmd窗口输入```chcp 65001```如下：
+```
+>chcp 65001
+Active code page: 65001
+```
+然后切换为Window自带的默认输入法，即可看到拼音对应的全部选项！
 
 ### 1.连接本地MySQL
 以管理员身份打开cmd，进入到MySQL安置目录的bin目录。连接本地Mysql服务器实例：
