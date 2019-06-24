@@ -134,8 +134,8 @@ mysql> SELECT g2_name FROM gtb2
 
 ### 2.MySQL更新数据UPDATE
 命令：```mysql> UPDATE tb_name SET col1_name=new_value1, col2_name=new_value2
-               [WHERE 条件1 AND(OR) 条件2]```
-**上述命令一般仅更新一条记录**
+               [WHERE 条件1 AND(OR) 条件2]```  
+**上述命令一般仅更新一条或一个字段的整体记录**
 ```
 mysql> UPDATE gtb2 SET
     -> g2_gender = 'M';
@@ -161,9 +161,9 @@ mysql> SELECT * FROM gtb2;
 +-------+-----------+-----------------+-----------+
 12 rows in set (0.00 sec)
 ```
-**UPDATE批量更新多条记录**
-[批量更新记录](https://www.jb51.net/article/100747.htm)
-### 批量更新同一字段的数据，语法如下：
+**UPDATE批量更新多条记录，参考文章[批量更新记录](https://www.jb51.net/article/100747.htm)**
+
+### 批量更新同一字段不连续记录的数据，语法如下：
 ```
 UPDATE table_name
 SET col_name = CASE id       #CASE后面必须跟主键，一般id为主键故在此示例
@@ -174,9 +174,7 @@ WHEN 7 THEN 'value3'
 END                          #END后无任何标点符号
 WHERE id IN (3, 5, 7, ……);   #利用WHERE说明表内更新数据的主键id
 ```
-
-
-
+以下为示例：
 ```
 mysql> UPDATE gtb2 SET
     -> g2_gender = CASE g2_id
@@ -206,4 +204,55 @@ mysql> SELECT * FROM gtb2;
 +-------+-----------+-----------------+-----------+
 12 rows in set (0.00 sec)
 ```
+### 批量更新不同字段不连续记录的数据，命令如下：
+```
+UPDATE tb_name
+SET col1_name = CASE id
+WHEN 3 THEN 'value1'         #id=3的行，col_name列对应Value变更为value1
+WHEN 5 THEN 'value2'
+WHEN 7 THEN 'value3'
+……
+END,                         #END后有个","逗号！！！
+col2_name = CASE id          #CASE后面必须跟主键，此处不再输入SET！！！
+WHEN 3 THEN 'value11'        #id=3的行，col_name列对应Value变更为value1
+WHEN 5 THEN 'value12'
+WHEN 7 THEN 'value13'
+……
+END                          #END后无任何标点符号
+WHERE id IN (3, 5, 7, ……);   #利用WHERE说明表内更新数据的主键id
+```
+**特别提醒，上面col1_name和col2_name下id的编号必须一致，否则会报错！！**
+示例：
+```
+mysql> UPDATE gtb2
+    -> SET g2_name= CASE g2_id
+    -> WHEN 1 THEN '孔明'
+    -> WHEN 9 THEN '貂蝉啊'
+    -> END,
+    -> g2_gender = CASE g2_id
+    -> WHEN 1 THEN 'm'
+    -> WHEN 9 THEN 'F'
+    -> END
+    -> WHERE g2_id IN (1,9);
+Query OK, 2 rows affected (0.30 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
 
+mysql> SELECT * FROM gtb2;
++-------+-----------+---------------+-----------+
+| g2_id | g2_name   | g2_class      | g2_gender |
++-------+-----------+---------------+-----------+
+|     1 | 孔明      | 六年级1班     | m         |
+|     2 | 小刚      | 五年级2班     | M         |
+|     3 | 小芳      | 五年级3班     | F         |
+|     4 | 小红      | 五年级2班     | F         |
+|     5 | 刘备      | 五年级1班     | M         |
+|     6 | 张飞      | 五年级1班     | M         |
+|     7 | 关羽      | 五年级2班     | M         |
+|     8 | 曹操      | 五年级3班     | M         |
+|     9 | 貂蝉啊    | 五年级3班     | F         |
+|    10 | 洛神      | 五年级3班     | F         |
+|    11 | 小红帽    | 五年级2班     | F         |
+|    12 | 大乔      | 五年级1班     | F         |
++-------+-----------+---------------+-----------+
+12 rows in set (0.00 sec)
+```
