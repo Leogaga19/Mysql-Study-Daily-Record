@@ -133,8 +133,11 @@ mysql> SELECT g2_name FROM gtb2
 ```
 
 ### 2.MySQL更新数据UPDATE
+命令：```mysql> UPDATE tb_name SET col1_name=new_value1, col2_name=new_value2
+               [WHERE 条件1 AND(OR) 条件2]```
+**上述命令一般仅更新一条记录**
 ```
-ysql> UPDATE gtb2 SET
+mysql> UPDATE gtb2 SET
     -> g2_gender = 'M';
 Query OK, 12 rows affected (0.33 sec)
 Rows matched: 12  Changed: 12  Warnings: 0
@@ -157,7 +160,24 @@ mysql> SELECT * FROM gtb2;
 |    12 | 大乔      | 五年级1班       | M         |
 +-------+-----------+-----------------+-----------+
 12 rows in set (0.00 sec)
+```
+**UPDATE批量更新多条记录**
+[批量更新记录](https://www.jb51.net/article/100747.htm)
+### 批量更新同一字段的数据，语法如下：
+```
+UPDATE table_name
+SET col_name = CASE id       #CASE后面必须跟主键，一般id为主键故在此示例
+WHEN 3 THEN 'value1'         #id=3的行，col_name列对应Value变更为value1
+WHEN 5 THEN 'value2'
+WHEN 7 THEN 'value3'
+……
+END                          #END后无任何标点符号
+WHERE id IN (3, 5, 7, ……);   #利用WHERE说明表内更新数据的主键id
+```
 
+
+
+```
 mysql> UPDATE gtb2 SET
     -> g2_gender = CASE g2_id
     -> WHEN 1 THEN 'F'
