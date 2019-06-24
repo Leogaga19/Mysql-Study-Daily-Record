@@ -161,7 +161,7 @@ mysql> SELECT * FROM gtb2;
 +-------+-----------+-----------------+-----------+
 12 rows in set (0.00 sec)
 ```
-**UPDATE批量更新多条记录，参考文章[批量更新记录](https://www.jb51.net/article/100747.htm)**
+**UPDATE批量更新多条记录，参考文章[批量更新记录](https://www.jb51.net/article/41852.htm)**
 
 ### 批量更新同一字段不连续记录的数据，语法如下：
 ```
