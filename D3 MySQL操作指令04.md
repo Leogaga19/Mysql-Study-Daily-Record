@@ -48,7 +48,42 @@ mysql> SELECT * FROM gtb2;
 +-------+-----------+---------------+-----------+
 11 rows in set (0.00 sec)
 ```
-## MySQL的LIKE模糊查询
-[参考1](https://www.runoob.com/mysql/mysql-like-clause.html)
-[参考2](https://blog.csdn.net/qq_15037231/article/details/80535907)
-[参考3](https://blog.csdn.net/u011479200/article/details/78513632)
+## 2.MySQL的LIKE模糊查询
+[LIKE的模糊查询参考文章](https://www.runoob.com/mysql/mysql-like-clause.html)  
+SQL的`SELECT`命令可以在MySQL中查询数据，但是通常需要查询模糊数据，比如查询姓‘李’的用户、名字里面含有‘龙’的用户等。上面的场景仅用`WHERE`很难实现，通过`LIKE`即可轻松搞定。
+**命令**
+```
+SELECT col1_name FROM tb_name
+WHERE col2_name LIKE 'valueA' [AND(OR)] col3_name LIKE 'valueB';
+```
+**其实上面的命令中`LIKE`的作用就是`=`，`LIKE`模糊查询的命令如下：**  
+![image](https://github.com/Leogaga19/Mysql-Study-Daily-Record/blob/master/Photos/LIKE%E6%A8%A1%E7%B3%8A%E6%9F%A5%E8%AF%A2%E6%96%B9%E6%B3%95.PNG)  
+当然，可以使用`NOT LIKE`来实现反向查询。
+`LIKE`模糊查询用法示例：  
+```
+mysql> SELECT * FROM gtb2
+    -> WHERE g2_name LIKE '小_';
++-------+---------+---------------+-----------+
+| g2_id | g2_name | g2_class      | g2_gender |
++-------+---------+---------------+-----------+
+|     2 | 小刚    | 五年级2班     | M         |
+|     3 | 小芳    | 五年级3班     | F         |
+|     4 | 小红    | 五年级2班     | F         |
++-------+---------+---------------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM gtb2
+    -> WHERE g2_class LIKE '五年级%' AND g2_gender='F';
++-------+-----------+---------------+-----------+
+| g2_id | g2_name   | g2_class      | g2_gender |
++-------+-----------+---------------+-----------+
+|     3 | 小芳      | 五年级3班     | F         |
+|     4 | 小红      | 五年级2班     | F         |
+|     9 | 貂蝉啊    | 五年级3班     | F         |
+|    10 | 洛神      | 五年级3班     | F         |
+|    11 | 小红帽    | 五年级2班     | F         |
+|    12 | 大乔      | 五年级1班     | F         |
++-------+-----------+---------------+-----------+
+6 rows in set (0.00 sec)
+```
+
