@@ -244,4 +244,35 @@ mysql> SELECT * FROM gtb2
 |     2 | 小刚    | 五年级2班     | M         |   10 |
 +-------+---------+---------------+-----------+------+
 5 rows in set (0.00 sec)
+
+mysql> SELECT age, name FROM shz
+    -> WHERE age>12 AND age<16
+    -> ORDER BY age aSC;
++------+-----------+
+| age  | name      |
++------+-----------+
+|   13 | 金瓶儿    |
+|   14 | 宋江      |
+|   14 | 鲁智深    |
+|   15 | 潘金莲    |
+|   15 | 柴进      |
+|   15 | 戴宗      |
++------+-----------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT  name, age FROM shz
+    -> WHERE age>12 AND age<16
+    -> ORDER BY age aSC;
++-----------+------+
+| name      | age  |
++-----------+------+
+| 金瓶儿    |   13 |
+| 宋江      |   14 |
+| 鲁智深    |   14 |
+| 潘金莲    |   15 |
+| 柴进      |   15 |
+| 戴宗      |   15 |
++-----------+------+
+6 rows in set (0.00 sec)
 ```
+
