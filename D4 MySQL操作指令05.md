@@ -137,7 +137,8 @@ mysql> SELECT name, sprice, pprice, sprice*0.7 AS "促销价格",sprice*0.7-ppri
 ## 3.选择NULL数据
 `NULL`存在是需使用`IS NULL`或者`IS NOT NULL`来完成条件限制
 示例：
-```mysql> SELECT pprice FROM pro
+```
+mysql> SELECT pprice FROM pro
     -> WHERE pprice IS NULL;
 +--------+
 | pprice |
