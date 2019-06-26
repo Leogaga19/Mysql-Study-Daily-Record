@@ -134,3 +134,16 @@ mysql> SELECT name, sprice, pprice, sprice*0.7 AS "促销价格",sprice*0.7-ppri
 +-----------+--------+--------+--------------+--------------+
 2 rows in set (0.00 sec)
 ```
+## 3.选择NULL数据
+`NULL`存在是需使用`IS NULL`或者`IS NOT NULL`来完成条件限制
+示例：
+```mysql> SELECT pprice FROM pro
+    -> WHERE pprice IS NULL;
++--------+
+| pprice |
++--------+
+|   NULL |
+|   NULL |
++--------+
+2 rows in set (0.00 sec)
+```
