@@ -13,7 +13,7 @@
 示例：`ALTER TABLE pro RENAME TO product;`将表名称替换为product。
 
 ## 2.MySQL中SELECT的其他用法
-### 2.1SELECT语句剔除重复数据
+### 2.1 SELECT语句剔除重复数据
 ```
 mysql> SELECT * FROM pro;
 +------+------------+--------------+--------+--------+------------+
@@ -58,7 +58,7 @@ mysql> SELECT DISTINCT pprice FROM pro;            #DISTINCT效果剔除重复�
 +--------+
 6 rows in set (0.00 sec)
 ```
-### 2.SELECT为表的列设定别名
+### 2.2 SELECT为表的列设定别名
 命令：`SELECT col1_name AS col1_new_name,col2_name AS col2_new_name FROM tb_name;`
 ```
 mysql> SELECT name AS "名称", type AS "类型", sprice AS "销售价格", pprice AS "采购价格" FROM pro;
@@ -76,7 +76,7 @@ mysql> SELECT name AS "名称", type AS "类型", sprice AS "销售价格", ppri
 +------------+--------------+--------------+--------------+
 8 rows in set (0.00 sec)
 ```
-### 3.SELECT配合WHERE运算符查询特定数据
+### 2.3 SELECT配合WHERE运算符查询特定数据
 `WHERE`的运算符`<,>,=,<>,<=,>=`都可以配合使用，示例：
 ```
 mysql> SELECT name, sprice, pprice FROM pro
@@ -90,7 +90,7 @@ mysql> SELECT name, sprice, pprice FROM pro
 +------------+--------+--------+
 3 rows in set (0.00 sec)
 ```
-### 4.SELECT查询数据修饰处理
+### 2.4 SELECT查询数据修饰处理
 场景如下：领导想知道商品价格打七折后的价格，销售利润，销售利润大于0商品。
 **组合使用‘别名’和‘操作符’拓展`SELECT`的使用场景！**
 ```
