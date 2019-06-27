@@ -195,3 +195,18 @@ mysql> SELECT pprice, COUNT(pprice) FROM pro
 +--------+---------------+
 6 rows in set (0.00 sec)
 ```
+### 3.3 含有WHERE的分组查询
+**查询命令执行顺序：FROM-->WHERE-->GROUP BY-->SELECT**
+示例：
+```
+mysql> SELECT pprice, COUNT(*) FROM pro
+    -> WHERE type = "衣服"
+    -> GROUP BY pprice;
++--------+----------+
+| pprice | COUNT(*) |
++--------+----------+
+|     50 |        1 |
+|   2800 |        1 |
++--------+----------+
+2 rows in set (0.00 sec)
+```
