@@ -58,3 +58,140 @@ SQL中常用的5个函数：
 **MAX**：搜寻表中任意列中的最大值；  
 **MIN**：搜寻表中任意列中的最小值。
 
+示例：
+```
+mysql> SELECT COUNT(pprice) FROM pro;     #查询pprice字段有多少数据，默认不统计Value Is Null的数据。
++---------------+
+| COUNT(pprice) |
++---------------+
+|             6 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT COUNT(*), COUNT(pprice) FROM pro;        #COUNT(*)统计含Value Is Null的数据。
++----------+---------------+
+| COUNT(*) | COUNT(pprice) |
++----------+---------------+
+|        8 |             6 |
++----------+---------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT SUM(pprice) FROM pro;                    #计算pprice数值列的汇总值，仅对数值列可以使用SUM函数！
++-------------+
+| SUM(pprice) |
++-------------+
+|       11760 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT AVG(pprice) FROM pro;                     #查询并计算pprice数值列的平均值，仅对数值列可以使用AVG函数！
++-------------+
+| AVG(pprice) |
++-------------+
+|   1960.0000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT COUNT(pprice), AVG(pprice) FROM pro;
++---------------+-------------+
+| COUNT(pprice) | AVG(pprice) |
++---------------+-------------+
+|             6 |   1960.0000 |
++---------------+-------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MAX(rd), MAX(pprice) FROM pro;            #查询并计算rd（登记日期）和pprice（采购价格）的最大值，MAX基本对各种值均可采用！
++------------+-------------+
+| MAX(rd)    | MAX(pprice) |
++------------+-------------+
+| 2009-11-11 |        5000 |
++------------+-------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT COUNT( DISTINCT type) FROM pro;           #查询并计算type共有多少不同的种类。
++-----------------------+
+| COUNT( DISTINCT type) |
++-----------------------+
+|                     3 |
++-----------------------+
+1 row in set (0.00 sec)
+```
+## 3.MySQL中对表进行分组
+CHAP 3-2 P91 **子句书写顺序：SELECT-->FROM-->WHERE-->GROUP BY**
+**分组命令：**  
+```
+SELECT <列名1>, <列名2>, <列名3>,……
+FROM tb_name
+[WHERE CLAUSE]
+GROUP BY <列名1>, <列名2>, <列名3>……；
+```
+### 3.1常规分组 示例：
+```
+mysql> SELECT  type, COUNT(type) FROM pro
+    -> GROUP BY type;
++--------------+-------------+
+| type         | COUNT(type) |
++--------------+-------------+
+| 衣服         |           2 |
+| 办公用品     |           2 |
+| 厨房用具     |           4 |
++--------------+-------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT  type FROM pro
+    -> GROUP BY type;
++--------------+
+| type         |
++--------------+
+| 衣服         |
+| 办公用品     |
+| 厨房用具     |
++--------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT  type FROM pro;
++--------------+
+| type         |
++--------------+
+| 衣服         |
+| 办公用品     |
+| 衣服         |
+| 厨房用具     |
+| 厨房用具     |
+| 厨房用具     |
+| 厨房用具     |
+| 办公用品     |
++--------------+
+8 rows in set (0.00 sec)
+```
+### 3.2 含有NULL值时的分组
+示例：
+```
+mysql> SELECT pprice, COUNT(*) FROM pro             #COUNT(*)统计包含NULL的数据！
+    -> GROUP BY pprice;
++--------+----------+
+| pprice | COUNT(*) |
++--------+----------+
+|     50 |        1 |
+|    320 |        1 |
+|   2800 |        2 |
+|   5000 |        1 |
+|   NULL |        2 |
+|    790 |        1 |
++--------+----------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT pprice, COUNT(pprice) FROM pro 
+    -> GROUP BY pprice;
++--------+---------------+
+| pprice | COUNT(pprice) |
++--------+---------------+
+|     50 |             1 |
+|    320 |             1 |
+|   2800 |             2 |
+|   5000 |             1 |
+|   NULL |             0 |
+|    790 |             1 |
++--------+---------------+
+6 rows in set (0.00 sec)
+```
