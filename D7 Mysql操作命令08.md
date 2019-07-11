@@ -45,7 +45,7 @@ mysql> CREATE VIEW apbt
     -> (SELECT AVG(sprice) FROM  pro             #关联子查询
     -> AS P2                                         
     -> WHERE P1.type = P2.type                   #WHERE语句非常关键，限定了P1和P2表格中的商品种类一致，是的AVG函数按照商品种类进行均值计算
-    -> GROUP BY type) AS asp
+    -> GROUP BY type) AS asp                     #此处的GROUP BY type也可以省略，查询结果一致！
     -> FROM pro
     -> AS P1;
 Query OK, 0 rows affected (0.19 sec)
