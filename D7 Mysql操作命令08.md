@@ -65,3 +65,125 @@ mysql> SELECT * FROM apbt;
 +------+------------+--------------+--------+-----------+
 8 rows in set (0.00 sec)
 ```
+
+# 字符串函数
+MySQL中创建以下表，练习字符串函数
+```
+mysql> CREATE TABLE SS
+    -> (s1 VARCHAR(40),
+    ->  s2 VARCHAR(40),
+    ->  s3 VARCHAR(40));
+Query OK, 0 rows affected (1.01 sec)
+
+mysql> INSERT INTO SS VALUES ('opx', 'rt', NULL);
+Query OK, 1 row affected (0.35 sec)
+mysql> INSERT INTO SS VALUES ('abc', 'def', NULL);
+Query OK, 1 row affected (0.30 sec)
+
+mysql> INSERT INTO SS VALUES ('山田', '太郎' ,'是我');
+Query OK, 1 row affected (0.14 sec)
+
+mysql> INSERT INTO SS VALUES ('aaa', NULL, NULL);
+Query OK, 1 row affected (0.17 sec)
+
+mysql> INSERT INTO SS VALUES (NULL, 'xyz', NULL);
+Query OK, 1 row affected (0.14 sec)
+
+mysql> INSERT INTO SS VALUES ('@!#$%', NULL, NULL);
+Query OK, 1 row affected (0.38 sec)
+
+mysql> INSERT INTO SS VALUES ('ABC', NULL, NULL);
+Query OK, 1 row affected (0.12 sec)
+
+mysql> INSERT INTO SS VALUES ('aBC', NULL, NULL);
+Query OK, 1 row affected (0.14 sec)
+
+mysql> INSERT INTO SS VALUES ('abc太郎', 'abc',  'ABC');
+Query OK, 1 row affected (0.42 sec)
+
+mysql> INSERT INTO SS VALUES ('abcdefabd', 'abc', 'ABC');
+Query OK, 1 row affected (0.12 sec)
+
+mysql> INSERT INTO SS VALUES ('micmic', 'i',  'I');
+Query OK, 1 row affected (0.15 sec)
+
+mysql> SELECT * FROM SS;
++-----------+--------+--------+
+| s1        | s2     | s3     |
++-----------+--------+--------+
+| opx       | rt     | NULL   |
+| abc       | def    | NULL   |
+| 山田      | 太郎   | 是我    |
+| aaa       | NULL   | NULL   |
+| NULL      | xyz    | NULL   |
+| @!#$%     | NULL   | NULL   |
+| ABC       | NULL   | NULL   |
+| aBC       | NULL   | NULL   |
+| abc太郎   | abc    | ABC    |
+| abcdefabd | abc    | ABC    |
+| micmic    | i      | I      |
++-----------+--------+--------+
+11 rows in set (0.00 sec)
+```
+## 字符串拼接
+**CONCAT 字符串拼接**  
+**CONCAT_WS    指定字符串分割拼接字符串拼接**
+### 1.语句：`CONCAT(str1,str2…)`    ###
+解释：将str1和str2……字符串拼接起来
+示例：
+```
+mysql>  SELECT  CONCAT('s1', 's2') AS s_cs;
++------+
+| s_cs |
++------+
+| s1s2 |
++------+
+1 row in set (0.00 sec)
+
+mysql>  SELECT s1, s2, CONCAT(s1, s2) AS s_cs FROM ss;
++-----------+--------+--------------+
+| s1        | s2     | s_cs         |
++-----------+--------+--------------+
+| opx       | rt     | opxrt        |
+| abc       | def    | abcdef       |
+| 山田      | 太郎   | 山田太郎     |
+| aaa       | NULL   | NULL         |
+| NULL      | xyz    | NULL         |
+| @!#$%     | NULL   | NULL         |
+| ABC       | NULL   | NULL         |
+| aBC       | NULL   | NULL         |
+| abc太郎   | abc    | abc太郎abc   |
+| abcdefabd | abc    | abcdefabdabc |
+| micmic    | i      | micmici      |
++-----------+--------+--------------+
+11 rows in set (0.00 sec)
+```
+
+### 2.语句：`CONCAT_WS(separator,str1,str2…)` separator是指分隔符   ###
+示例：
+```
+mysql> SELECT CONCAT_WS(" ","Hello","word");
++-------------------------------+
+| CONCAT_WS(" ","Hello","word") |
++-------------------------------+
+| Hello word                    |
++-------------------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT CONCAT_WS(", ","Hello","word");
++--------------------------------+
+| CONCAT_WS(", ","Hello","word") |
++--------------------------------+
+| Hello, word                    |
++--------------------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT CONCAT_WS(" ","Hello","word", "!");
++------------------------------------+
+| CONCAT_WS(" ","Hello","word", "!") |
++------------------------------------+
+| Hello word !                       |
++------------------------------------+
+1 row in set (0.00 sec)
+```
+
