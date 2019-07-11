@@ -187,3 +187,100 @@ mysql> SELECT CONCAT_WS(" ","Hello","word", "!");
 1 row in set (0.00 sec)
 ```
 
+### 字符串长度
+语句：`LENGTH(str)`
+示例：
+```
+mysql> SELECT s1, LENGTH(s1) AS "s1长度" FROM SS;
++-----------+----------+
+| s1        | s1长度   |
++-----------+----------+
+| opx       |        3 |
+| abc       |        3 |
+| 山田      |        6 |               #1个汉字占3个字符
+| aaa       |        3 |
+| NULL      |     NULL | 
+| @!#$%     |        5 |
+| ABC       |        3 |
+| aBC       |        3 |
+| abc太郎   |        9 |
+| abcdefabd |        9 |
+| micmic    |        6 |
++-----------+----------+
+11 rows in set (0.00 sec)
+```
+
+### 字符串大小写转换
+**小写转换 `LOWER(str1)` 示例：**
+```
+mysql> SELECT s1, LOWER(s1) AS low_str FROM SS
+    -> WHERE s1 IN ('ABC', 'aBC', 'abc', '山田');
++--------+---------+
+| s1     | low_str |
++--------+---------+
+| abc    | abc     |
+| 山田   | 山田    |
+| ABC    | abc     |
+| aBC    | abc     |
++--------+---------+
+4 rows in set (0.00 sec)
+```
+**大写转换 `UPPER(str1)` 示例：**
+```
+mysql> SELECT s1, UPPER(s1) AS up_str FROM SS
+    -> WHERE s1 IN ('ABC', 'aBC', 'abc', '山田');
++--------+--------+
+| s1     | up_str |
++--------+--------+
+| abc    | ABC    |
+| 山田   | 山田   |
+| ABC    | ABC    |
+| aBC    | ABC    |
++--------+--------+
+4 rows in set (0.00 sec)
+```
+### 字符串的替换
+**语句：`REPLACE(对象字符串，替换前的字符串，替换后的字符串)` 示例：**
+```
+mysql> SELECT s1, s2, s3,
+    -> REPLACE(s1, s2, s3) AS "替换字符串"
+    -> FROM SS;
++-----------+--------+--------+-----------------+
+| s1        | s2     | s3     | 替换字符串       |
++-----------+--------+--------+-----------------+
+| opx       | rt     | NULL   | NULL            |
+| abc       | def    | NULL   | NULL            |
+| 山田      | 太郎   | 是我    | 山田            |
+| aaa       | NULL   | NULL   | NULL            |
+| NULL      | xyz    | NULL   | NULL            |
+| @!#$%     | NULL   | NULL   | NULL            |
+| ABC       | NULL   | NULL   | NULL            |
+| aBC       | NULL   | NULL   | NULL            |
+| abc太郎   | abc    | ABC    | ABC太郎          |    #用ABC 替换 abc太郎 中的 abc
+| abcdefabd | abc    | ABC    | ABCdefabd       |
+| micmic    | i      | I      | mIcmIc          |
++-----------+--------+--------+-----------------+
+11 rows in set (0.00 sec)
+```
+### 字符串的截取SUBSTRING
+**语句：`SUBSTRING(对象字符串 FROM 截取的起始位置 FOR 截取的字符数)` 示例：**
+```
+mysql> SELECT s1,
+    -> SUBSTRING(s1 FROM 3 FOR 2) AS "截取2个字符" FROM SS;
++-----------+------------------+
+| s1        | 截取2个字符       |
++-----------+------------------+
+| opx       | x                |
+| abc       | c                |
+| 山田      |                  |
+| aaa       | a                |
+| NULL      | NULL             |
+| @!#$%     | #$               |
+| ABC       | C                |
+| aBC       | C                |
+| abc太郎   | c太              |
+| abcdefabd | cd               |
+| micmic    | cm               |
++-----------+------------------+
+11 rows in set (0.00 sec)
+```
