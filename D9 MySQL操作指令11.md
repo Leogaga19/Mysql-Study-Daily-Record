@@ -111,7 +111,7 @@ mysql> SELECT id, name, sprice FROM pro
 示例：选出“大阪店（000C）在售商品（product_id）的销售单价（sale_price）”。
 ```
 mysql> SELECT id, name, sprice FROM pro AS P
-    -> WHERE EXISTS (SELECT * FROM SP AS SSP
+    -> WHERE EXISTS (SELECT * FROM SP AS SSP   #此处为EXISTs!!!
     -> WHERE SSP.id = "000C"
     -> AND SSP.pid = P.id);
 +------+------------+--------+
@@ -123,4 +123,56 @@ mysql> SELECT id, name, sprice FROM pro AS P
 | 0007 | 擦菜板     |    880 |
 +------+------------+--------+
 4 rows in set (0.00 sec)
+
+mysql> SELECT id, name, sprice FROM pro
+    -> AS A
+    -> WHERE EXISTS (SELECT id FROM sp AS B    #此处用SELECT id 而不是SELECT *！！！
+    -> WHERE B.id = '000C' 
+    -> AND B.pid = A.id);
++------+------------+--------+
+| id   | name       | sprice |
++------+------------+--------+
+| 0003 | 运动T恤    |   4000 |
+| 0004 | 菜刀       |   3000 |
+| 0006 | 叉子       |    500 |
+| 0007 | 擦菜板     |    880 |
++------+------------+--------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT id, name, sprice FROM pro
+    -> AS A
+    -> WHERE EXISTS (SELECT 1 FROM sp AS B    #此处用SELECT 1 而不是SELECT *！！！
+    -> WHERE B.id = '000C'
+    -> AND B.pid = A.id);
++------+------------+--------+
+| id   | name       | sprice |
++------+------------+--------+
+| 0003 | 运动T恤    |   4000 |
+| 0004 | 菜刀       |   3000 |
+| 0006 | 叉子       |    500 |
+| 0007 | 擦菜板     |    880 |
++------+------------+--------+
+4 rows in set (0.00 sec)
 ```
+由上可知，使用`SELECT * 和 SELECT id 和 SELECT 1`的查询结果一致，这就是`EXISTS`的特性，**`EXIST`仅关心记录是否存在，因此返回哪些列都没有关系！！！**
+ 
+### NOT EXIST 
+示例:
+```
+mysql> SELECT id, name, sprice FROM pro
+    -> AS A
+    -> WHERE NOT EXISTS (SELECT id FROM sp AS B   #此处变为NOT EXIST，查询结果与EXIST互补！！
+    -> WHERE B.id = '000C'
+    -> AND B.pid = A.id);
++------+-----------+--------+
+| id   | name      | sprice |
++------+-----------+--------+
+| 0001 | T恤衫     |   1000 |
+| 0002 | 打孔器    |    500 |
+| 0005 | 高压锅    |   6800 |
+| 0008 | 圆珠笔    |    100 |
++------+-----------+--------+
+4 rows in set (0.00 sec)
+```
+
+
