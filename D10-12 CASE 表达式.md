@@ -121,4 +121,16 @@ mysql> SELECT type, SUM(sprice) AS sum_spric FROM pro
 +--------------+-----------+
 3 rows in set (0.00 sec)
 
+mysql> SELECT
+    -> SUM(CASE WHEN sprice <= 1000 THEN 1 ELSE 0 END) AS low,
+    -> SUM(CASE WHEN sprice BETWEEN 1001 AND 3000 THEN 1 ELSE 0 END) AS mid,
+    -> SUM(CASE WHEN sprice >= 3001 THEN 1 ELSE 0 END) AS high
+    -> FROM pro;
++------+------+------+
+| low  | mid  | high |
++------+------+------+
+|    5 |    1 |    2 |
++------+------+------+
+1 row in set (0.00 sec)
+
 ```
