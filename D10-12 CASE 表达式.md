@@ -21,7 +21,7 @@ mysql> SELECT *,
     -> (CASE
     ->  WHEN age>12 THEN '青春期'
     ->  WHEN age<=12 THEN '幼儿组'
-    ->  END) AS 'GROUP'                        #此处，AS 可以省略！
+    ->  END) AS 'GROUP'                        #此处，AS 可以省略！ END 也可省略，默认为END 
     -> FROM shz;
 +----+-----------+---------------+------+------+-----------+
 | id | name      | class         | gen  | age  | GROUP     |
@@ -92,5 +92,33 @@ mysql> SELECT name, type,
 | 圆珠笔     | 办公用品     | B:办公用品     |
 +------------+--------------+----------------+
 8 rows in set (0.00 sec)
+```
+**场景：对shop.pro表格中的三类上面销售单价进行汇总**  
+两种实现方式：`CASE` 和 `GROUP BY`
+```
+mysql> SELECT SUM(CASE WHEN type='衣服'
+    ->                  THEN sprice ELSE 0 END) AS ssp_clothes,
+    ->        SUM(CASE WHEN type='办公用品'
+    ->                  THEN sprice ELSE 0 END) AS ssp_office,
+    ->        SUM(CASE WHEN type='厨房用具'
+    ->                  THEN sprice ELSE 0 END) AS ssp_kitchen
+    -> FROM pro;
++-------------+------------+-------------+
+| ssp_clothes | ssp_office | ssp_kitchen |
++-------------+------------+-------------+
+|        5000 |        600 |       11180 |
++-------------+------------+-------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT type, SUM(sprice) AS sum_spric FROM pro
+    -> GROUP BY type;
++--------------+-----------+
+| type         | sum_spric |
++--------------+-----------+
+| 衣服         |      5000 |
+| 办公用品     |       600 |
+| 厨房用具     |     11180 |
++--------------+-----------+
+3 rows in set (0.00 sec)
 
 ```
